@@ -90,8 +90,6 @@ class TreeForm extends FormBase {
     $validTypes = [
       'annotationstem' => ["Annotation Stem", EntryPoints::ANNOTATION_STEM],
       'attribute' => ["Attribute", EntryPoints::ATTRIBUTE],
-      'detectorstem' => ["Detector Stem", EntryPoints::DETECTOR_STEM],
-      'actuatorstem' => ["Actuator Stem", EntryPoints::ACTUATOR_STEM],
       'componentstem' => ["Component Stem", EntryPoints::COMPONENT_STEM],
       'entity' => ["Entity", EntryPoints::ENTITY],
       'group' => ["Group", EntryPoints::GROUP],
@@ -112,8 +110,6 @@ class TreeForm extends FormBase {
       'component' => ["Component", EntryPoints::COMPONENT],
       // 'platforminstance' => ["Platform Instance", EntryPoints::PLATFORM_INSTANCE],
       // 'instrumentinstance' => ["Instrument Instance", EntryPoints::INSTRUMENT_INSTANCE],
-      // 'detectorinstance' => ["Detector Instance", EntryPoints::DETECTOR_INSTANCE],
-      // 'actuatorinstance' => ["Actuator Instance", EntryPoints::ACTUATOR_INSTANCE]
     ];
 
     $branches_param = [
@@ -142,18 +138,6 @@ class TreeForm extends FormBase {
         'label' => 'Component',
         'typeNamespace' => EntryPoints::COMPONENT,
         'uriNamespace' => EntryPoints::COMPONENT
-      ],
-      [
-        'id' => 'detectorstem',
-        'uri' => EntryPoints::DETECTOR_STEM,
-        'label' => 'Detector Stem',
-        'uriNamespace' => EntryPoints::DETECTOR_STEM
-      ],
-      [
-        'id' => 'actuatorstem',
-        'uri' => EntryPoints::ACTUATOR_STEM,
-        'label' => 'Actuator Stem',
-        'uriNamespace' => EntryPoints::ACTUATOR_STEM
       ],
       [
         'id' => 'detectorattribute',

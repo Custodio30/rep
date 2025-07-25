@@ -11,20 +11,15 @@ use Drupal\sir\Entity\Instrument;
     /*
      *    CLASSES
      */
-    const ACTUATOR                        = VSTOI::VSTOI . "Actuator";
-    const ACTUATOR_INSTANCE               = VSTOI::VSTOI . "ActuatorInstance";
-    const ACTUATOR_STEM                   = VSTOI::VSTOI . "ActuatorStem";
     const ANNOTATION                      = VSTOI::VSTOI . "Annotation";
     const ANNOTATION_STEM                 = VSTOI::VSTOI . "AnnotationStem";
     const CODEBOOK                        = VSTOI::VSTOI . "Codebook";
     const CONTAINER                       = VSTOI::VSTOI . "Container";
     const CONTAINER_SLOT                  = VSTOI::VSTOI . "ContainerSlot";
     const COMPONENT                       = VSTOI::VSTOI . "Component";
+    const COMPONENT_INSTANCE              = VSTOI::VSTOI . "ComponentInstance";
     const COMPONENT_STEM                  = VSTOI::VSTOI . "ComponentStem";
     const DEPLOYMENT                      = VSTOI::VSTOI . "Deployment";
-    const DETECTOR                        = VSTOI::VSTOI . "Detector";
-    const DETECTOR_INSTANCE               = VSTOI::VSTOI . "DetectorInstance";
-    const DETECTOR_STEM                   = VSTOI::VSTOI . "DetectorStem";
     const INSTANCE                        = VSTOI::VSTOI . "Instance";
     const INSTRUMENT                      = VSTOI::VSTOI . "Instrument";
     const INSTRUMENT_INSTANCE             = VSTOI::VSTOI . "InstrumentInstance";
@@ -52,8 +47,8 @@ use Drupal\sir\Entity\Instrument;
     const HAS_WEB_DOCUMENTATION           = VSTOI::VSTOI . "hasWebDocumentation";
     const HAS_CONTENT                     = VSTOI::VSTOI . "hasContent";
     const HAS_CODEBOOK                    = VSTOI::VSTOI . "hasCodebook";
-    const HAS_DETECTOR                    = VSTOI::VSTOI . "hasDetector";
-    const HAS_DETECTOR_STEM               = VSTOI::VSTOI . "hasDetectorStem";
+    const HAS_COMPONENT                   = VSTOI::VSTOI . "hasComponent";
+    const HAS_COMPONENT_STEM              = VSTOI::VSTOI . "hasComponentStem";
     const HAS_INSTRUCTION                 = VSTOI::VSTOI . "hasInstruction";
     const HAS_LANGUAGE                    = VSTOI::VSTOI . "hasLanguage";
     const HAS_POSITION                    = VSTOI::VSTOI . "hasPosition";

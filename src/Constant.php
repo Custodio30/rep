@@ -20,14 +20,9 @@ class Constant {
   const PREFIX_DD                         = "DD0";
   const PREFIX_DP2                        = "DP2";
   const PREFIX_DEPLOYMENT                 = "DPL";
-  const PREFIX_ACTUATOR_STEM              = "ACS";
-  const PREFIX_ACTUATOR                   = "ACT";
-  const PREFIX_ACTUATOR_INSTANCE          = "ACI";
-  const PREFIX_COMPONENT_STEM             = "CSM";
-  const PREFIX_COMPONENT                  = "COM";
-  const PREFIX_DETECTOR_STEM              = "DSM";
-  const PREFIX_DETECTOR                   = "DTC";
-  const PREFIX_DETECTOR_INSTANCE          = "DTI";
+  const PREFIX_COMPONENT_STEM             = "CPS";
+  const PREFIX_COMPONENT                  = "CPO";
+  const PREFIX_COMPONENT_INSTANCE         = "CPI";
   const PREFIX_DSG                        = "DSG";
   const PREFIX_FUNDING_SCHEME             = "FSC";
   const PREFIX_INSTRUMENT                 = "INS";

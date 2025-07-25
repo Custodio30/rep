@@ -71,15 +71,6 @@ class Utils {
       return NULL;
     }
     switch ($elementType) {
-      case "actuator":
-        $short = Constant::PREFIX_ACTUATOR;
-        break;
-      case "actuatorinstance":
-        $short = Constant::PREFIX_ACTUATOR_INSTANCE;
-        break;
-      case "actuatorstem":
-        $short = Constant::PREFIX_ACTUATOR_STEM;
-        break;
       case "annotation":
         $short = Constant::PREFIX_ANNOTATION;
         break;
@@ -88,6 +79,9 @@ class Utils {
         break;
       case "component":
         $short = Constant::PREFIX_COMPONENT;
+        break;
+      case "componentinstance":
+        $short = Constant::PREFIX_COMPONENT_INSTANCE;
         break;
       case "componentstem":
         $short = Constant::PREFIX_COMPONENT_STEM;
@@ -106,15 +100,6 @@ class Utils {
         break;
       case "deployment":
         $short = Constant::PREFIX_DEPLOYMENT;
-        break;
-      case "detector":
-        $short = Constant::PREFIX_DETECTOR;
-        break;
-      case "detectorinstance":
-        $short = Constant::PREFIX_DETECTOR_INSTANCE;
-        break;
-      case "detectorstem":
-        $short = Constant::PREFIX_DETECTOR_STEM;
         break;
       case "dp2":
         $short = Constant::PREFIX_DP2;
@@ -455,11 +440,11 @@ class Utils {
   }
 
   public static function elementTypeModule($elementtype) {
-    $sir = ['instrument', 'containerslot', 'detectorstem', 'detector', 'actuatorstem', 'actuator', 'codebook', 'containerslot', 'responseoption', 'annotationstem', 'annotation', 'processstem', 'process'];
+    $sir = ['instrument', 'containerslot', 'component', 'componentstem', 'codebook', 'containerslot', 'responseoption', 'annotationstem', 'annotation', 'processstem', 'process'];
     $sem = ['semanticvariable','entity','attribute','unit','sdd'];
     $rep = ['datafile'];
     $std = ['std','study','studyrole', 'studyobjectcollection','studyobject', 'virtualcolumn', 'stream'];
-    $dpl = ['dp2', 'str', 'platform', 'platforminstance', 'instrumentinstance', 'detectorinstance', 'actuatorinstance', 'deployment'];
+    $dpl = ['dp2', 'str', 'platform', 'platforminstance', 'instrumentinstance', 'componentinstance', 'deployment'];
     $socialm = ['kgr','place','organization','person','postaladdress'];
     if (in_array($elementtype,$sir)) {
       return 'sir';
@@ -773,151 +758,6 @@ class Utils {
     return $label; // Outputs: calf
   }
 
-
-  // /**
-  //  * RECURSIVE BUILD OF INSTRUMENTS CONTAINER ELEMENTS
-  //  */
-  // public static function buildSlotElements($containerUri, $api, $renderMode = 'table') {
-  //   // ------------------------------------------
-  //   // 1) Internal recursive function to build a "tree" data structure
-  //   //    from the slot elements, so we have a consistent representation
-  //   //    for both table and tree renderings.
-  //   // ------------------------------------------
-  //   $buildTree = function($uri, $api) use (&$buildTree) {
-  //     // Fetch slotElements for this container
-  //     $slotElements = $api->parseObjectResponse($api->slotElements($uri), 'slotElements');
-  //     if (empty($slotElements)) {
-  //       return [];
-  //     }
-
-  //     $tree = [];
-
-  //     foreach ($slotElements as $slotElement) {
-  //       // Prepare a basic structure for each slotElement
-  //       $item = [
-  //         'uri'      => $slotElement->uri ?? '',
-  //         'type'     => isset($slotElement->hascoTypeUri) ? Utils::namespaceUri($slotElement->hascoTypeUri) : '',
-  //         'label'    => $slotElement->label ?? '',
-  //         'priority' => $slotElement->hasPriority ?? '',
-  //         'element'  => '', // This will store any custom content/markup
-  //         'children' => [],
-  //       ];
-
-  //       // Example logic to fill 'element' or other data
-  //       if ($item['type'] === Utils::namespaceUri(VSTOI::CONTAINER_SLOT)) {
-  //         // Example: if it's a container slot (detector/actuator), do your custom logic
-  //         $item['element'] = 'ContainerSlot content here...';
-  //       }
-  //       elseif ($item['type'] === Utils::namespaceUri(VSTOI::SUBCONTAINER)) {
-  //         // If it's a subcontainer, call recursively
-  //         $item['element'] = 'Subcontainer: ' . ($slotElement->label ?? '[no label]');
-  //         if (!empty($item['uri'])) {
-  //           $item['children'] = $buildTree($item['uri'], $api);
-  //         }
-  //       }
-  //       else {
-  //         // Unknown or other type
-  //         $item['element'] = '(Unknown type)';
-  //       }
-
-  //       $tree[] = $item;
-  //     }
-
-  //     return $tree;
-  //   };
-
-  //   // ------------------------------------------
-  //   // 2) Internal function to render the tree data as a nested <ul>
-  //   // ------------------------------------------
-  //   $renderAsTree = function(array $tree) use (&$renderAsTree) {
-  //     if (empty($tree)) {
-  //       return '';
-  //     }
-
-  //     $html = '<ul>';
-  //     foreach ($tree as $item) {
-  //       // Build a display text, e.g. "[Type] Label (priority)"
-  //       $title = '[' . $item['type'] . '] ' . $item['label']
-  //              . ' (priority: ' . $item['priority'] . ')';
-
-  //       $html .= '<li>';
-  //       $html .= '<div>' . $title . '</div>';
-  //       $html .= '<div>' . $item['element'] . '</div>';
-
-  //       // If there are children, render them recursively
-  //       if (!empty($item['children'])) {
-  //         $html .= $renderAsTree($item['children']);
-  //       }
-
-  //       $html .= '</li>';
-  //     }
-  //     $html .= '</ul>';
-
-  //     return $html;
-  //   };
-
-  //   // ------------------------------------------
-  //   // 3) Internal function to render the tree data as nested tables
-  //   // ------------------------------------------
-  //   $renderAsTable = function(array $tree) use (&$renderAsTable) {
-  //     // Define the table header
-  //     $header = [
-  //       t('Type'),
-  //       t('Label'),
-  //       t('Priority'),
-  //       t('Element'),
-  //     ];
-
-  //     $rows = [];
-  //     foreach ($tree as $item) {
-  //       // Build a single row for this item
-  //       $rows[] = [
-  //         $item['type'],
-  //         $item['label'],
-  //         $item['priority'],
-  //         $item['element'],
-  //       ];
-
-  //       // If there are children, render them as a sub-table in a new row
-  //       if (!empty($item['children'])) {
-  //         $subTable = $renderAsTable($item['children']);
-  //         // Insert a row with a single cell containing the sub-table
-  //         $rows[] = [
-  //           [
-  //             'data' => $subTable,
-  //             'colspan' => 4, // spanning all columns
-  //           ],
-  //         ];
-  //       }
-  //     }
-
-  //     // Return the Drupal render array for the table
-  //     return [
-  //       '#type'   => 'table',
-  //       '#header' => $header,
-  //       '#rows'   => $rows,
-  //       '#empty'  => t('No response options found'),
-  //     ];
-  //   };
-
-  //   // ------------------------------------------
-  //   // 4) Build the tree data structure, then render based on $renderMode
-  //   // ------------------------------------------
-  //   $tree = $buildTree($containerUri, $api);
-
-  //   if ($renderMode === 'tree') {
-  //     // Wrap the HTML string in a markup render array
-  //     return [
-  //       '#type' => 'markup',
-  //       '#markup' => $renderAsTree($tree),
-  //     ];
-  //   }
-  //   else {
-  //     // Return a Drupal render array with nested tables
-  //     return $renderAsTable($tree);
-  //   }
-  // }
-
   /*****************************************************
    * Build and render slot elements in either a table
    * or a tree format, **recursively** starting from
@@ -927,7 +767,7 @@ class Utils {
     // ------------------------------------------
     // 1) Internal recursive function:
     //    Build a "tree" data structure by exploring
-    //    subcontainers, container slots, detectors, etc.
+    //    subcontainers, container slots, components, etc.
     // ------------------------------------------
     $buildTree = function($uri) use (&$buildTree, $api) {
 
@@ -962,7 +802,7 @@ class Utils {
         /****************************************************
          * Logic to determine if it's a subcontainer,
          * a container slot referencing another container,
-         * or a leaf (detector, actuator, etc.).
+         * or a leaf (component, etc.).
          ****************************************************/
         if ($typeUri === VSTOI::SUBCONTAINER) {
           // Mark as subcontainer
@@ -974,7 +814,7 @@ class Utils {
         }
         elseif ($typeUri === VSTOI::CONTAINER_SLOT) {
           // Possibly a container slot with a component
-          // (detector, actuator, or even another subcontainer)
+          // (component, or even another subcontainer)
           $item['element'] = 'No element was added to slot.'; // Adjust as needed
 
           if (!empty($slotElement->hasComponent)) {
@@ -993,8 +833,8 @@ class Utils {
                 $item['element'] = 'ContainerSlot referencing a container: ' . ($componentObj->label ?? '[no label]');
                 $item['children'] = $buildTree($componentObj->uri);
               }
-              // If the component is a DETECTOR, ACTUATOR, or other "leaf" type
-              else if ($componentType === VSTOI::DETECTOR || $componentType === VSTOI::ACTUATOR) {
+              // If the component is a COMPONENT, or other "leaf" type
+              else if ($componentType === VSTOI::COMPONENT) {
                 $type = self::namespaceUri($componentObj->hascoTypeUri);
                 if (isset($componentObj->uri)) {
                   // $componentUri = t('<b>'.$type.'</b>: [<a target="_new" href="'.$root_url.REPGUI::DESCRIBE_PAGE.base64_encode($componentObj->uri).'">' . $componentObj->typeLabel . '</a>] ');
@@ -1014,8 +854,8 @@ class Utils {
                   $codebook = '<b>CB</b>: [EMPTY]';
                 }
                 $item['element'] = $componentUri . " " . $content . " " . $codebook;
-                // $item['element'] = 'Detector: ' . ($componentObj->label ?? '[no label]');
-                // No recursion, as a detector is typically a leaf
+                // $item['element'] = 'Component: ' . ($componentObj->label ?? '[no label]');
+                // No recursion, as a component is typically a leaf
               }
               else {
                 // Unknown or other type
@@ -1102,7 +942,7 @@ class Utils {
           */
         }
         else {
-          // Normal item (container slot, detector, etc.)
+          // Normal item (container slot, component, etc.)
           $rows[] = [
             $item['type'],
             $item['label'],

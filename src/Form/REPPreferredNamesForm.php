@@ -54,24 +54,14 @@
             '#default_value' => $instrument,
         ];
 
-        $detector = "";
-        if ($config->get("preferred_detector")!= NULL) {
-            $detector = $config->get("preferred_detector");
+        $component = "";
+        if ($config->get("preferred_component")!= NULL) {
+            $component = $config->get("preferred_component");
         }
-        $form['preferred_detector'] = [
+        $form['preferred_component'] = [
             '#type' => 'textfield',
-            '#title' => $this->t("Detector's preferred name"),
-            '#default_value' => $detector,
-        ];
-
-        $actuator = "";
-        if ($config->get("preferred_actuator")!= NULL) {
-            $actuator = $config->get("preferred_actuator");
-        }
-        $form['preferred_actuator'] = [
-            '#type' => 'textfield',
-            '#title' => $this->t("Actuator's preferred name"),
-            '#default_value' => $actuator,
+            '#title' => $this->t("Component's preferred name"),
+            '#default_value' => $component,
         ];
 
         $proccess = "";
@@ -105,11 +95,8 @@
         if(strlen($form_state->getValue('preferred_instrument')) < 1) {
             $form_state->setErrorByName('preferred_instrument', $this->t("Please inform a preferred name for instruments."));
         }
-        if(strlen($form_state->getValue('preferred_actuator')) < 1) {
-          $form_state->setErrorByName('preferred_actuator', $this->t("Please inform a preferred name for actuators."));
-      }
-        if(strlen($form_state->getValue('preferred_detector')) < 1) {
-            $form_state->setErrorByName('preferred_detector', $this->t("Please inform a preferred name for detectors."));
+        if(strlen($form_state->getValue('preferred_component')) < 1) {
+            $form_state->setErrorByName('preferred_component', $this->t("Please inform a preferred name for components."));
         }
         if(strlen($form_state->getValue('preferred_process')) < 1) {
             $form_state->setErrorByName('preferred_process', $this->t("Please inform a preferred name for processes."));
@@ -131,15 +118,12 @@
         //save confs
         if ($form_state->getValue('preferred_instrument') != null &&
             $form_state->getValue('preferred_instrument') != "" &&
-            $form_state->getValue('preferred_actuator') != null &&
-            $form_state->getValue('preferred_actuator') != "" &&
-            $form_state->getValue('preferred_detector') != null &&
-            $form_state->getValue('preferred_detector') != "" &&
+            $form_state->getValue('preferred_component') != null &&
+            $form_state->getValue('preferred_component') != "" &&
             $form_state->getValue('preferred_process') != null &&
             $form_state->getValue('preferred_process') != "") {
           $config->set("preferred_instrument", $form_state->getValue('preferred_instrument'));
-          $config->set("preferred_actuator", $form_state->getValue('preferred_actuator'));
-          $config->set("preferred_detector", $form_state->getValue('preferred_detector'));
+          $config->set("preferred_component", $form_state->getValue('preferred_component'));
           $config->set("preferred_process", $form_state->getValue('preferred_process'));
           $config->save();
         }

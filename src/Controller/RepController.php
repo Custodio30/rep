@@ -17,7 +17,7 @@ class RepController extends ControllerBase {
     $content .= "<ul>";
     $content .= "<li>Building canonical instrument descriptions with SIR Elements</li>";
     $content .= "<li>Creating my first instrument</li>";
-    $content .= "<li>Creating detectors and connecting them to instruments</li>";
+    $content .= "<li>Creating components and connecting them to instruments</li>";
     $content .= "<li>Creating subcontainers inside my instrument (e.g., sections, subsections, etc)</li>";
     $content .= "<li>Navigating within my instrument and its subsections</li>";
     $content .= "<li>Explaing how is the general SIR layout for containers (i.e., instruments and their subcontainers)</li>";

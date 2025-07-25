@@ -16,7 +16,7 @@ class ListUsage {
     return $elements;
   }
 
-  public static function fromDetectorToHtml($containerslots) {
+  public static function fromComponentToHtml($containerslots) {
     $html = "<ul>";
     if (sizeof($containerslots) <= 0) {
       $html .= "<li>NONE</li>";
@@ -24,9 +24,9 @@ class ListUsage {
       foreach ($containerslots as $containerslot) {
         $instrument = ListUsage::getInstrument($containerslot->belongsTo);
         if ($instrument != NULL) {
-          $html .= "<li>Position " . $containerslot->hasPriority . " in Questionnaire " . $instrument->label . " (" . Utils::repUriLink($instrument->uri) . ")</li>"; 
+          $html .= "<li>Position " . $containerslot->hasPriority . " in Questionnaire " . $instrument->label . " (" . Utils::repUriLink($instrument->uri) . ")</li>";
         }
-      }     
+      }
     }
     $html .= "</ul>";
     return $html;
