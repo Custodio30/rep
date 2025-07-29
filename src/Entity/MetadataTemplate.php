@@ -807,7 +807,8 @@ class MetadataTemplate
       $card = [
         '#type' => 'container',
         '#attributes' => [
-          'class' => ['col-md-4'],
+          'class' => ['col-md-6'],
+          'style' => 'margin-bottom: 1.5rem!important;',
           'id' => 'card-item-' . md5($uri),
         ],
       ];
@@ -829,11 +830,12 @@ class MetadataTemplate
       ];
 
       // Set the image: if an image exists in the element, use it; otherwise, use a placeholder.
-      if (isset($element->hasImageUri) && !empty($element->hasImageUri)) {
+      if (!empty($element->hasImageUri)) {
         $image_uri = $element->hasImageUri;
       }
       else {
-        $image_uri = base_path() . \Drupal::service('extension.list.module')->getPath('rep') . '/images/std_placeholder.png';
+        // $image_uri = base_path() . \Drupal::service('extension.list.module')->getPath('rep') . '/images/std_placeholder.png';
+        $image_uri = Utils::getAPIImage($uri, $element->hasImageUri, UTILS::placeholderImage($element->hascoTypeUri,'study'));
       }
 
       // Card body: divided into a row with a single column for details.
@@ -849,11 +851,28 @@ class MetadataTemplate
             'class' => ['row'],
             'style' => 'margin-bottom:0!important;',
           ],
+          // Left column: image.
+          'image_column' => [
+            '#type' => 'container',
+            '#attributes' => [
+              'class' => ['col-md-5', 'd-flex', 'justify-content-center', 'align-items-center'],
+              'style' => 'margin-bottom:0!important;',
+            ],
+            'image' => [
+              '#theme' => 'image',
+              '#uri' => $image_uri,
+              '#alt' => t('Image for @name', ['@name' => $title]),
+              '#attributes' => [
+                'class' => ['img-fluid', 'mb-0', 'border', 'border-5', 'rounded', 'rounded-5'],
+                // 'style' => 'width: 70%',
+              ],
+            ],
+          ],
           // Details column.
           'text_column' => [
             '#type' => 'container',
             '#attributes' => [
-              'class' => ['col-md-12'],
+              'class' => ['col-md-7'],
               'style' => 'margin-bottom:0!important;',
             ],
             'text' => [
@@ -936,15 +955,22 @@ class MetadataTemplate
 
     // Group the cards into rows (3 cards per row).
     $output = [];
-    foreach (array_chunk($cards, 3) as $row) {
-      $output[] = [
+    $output[] = [
         '#type' => 'container',
         '#attributes' => [
           'class' => ['row', 'mb-0'],
         ],
-        'cards' => $row,
+        'cards' => $cards,
       ];
-    }
+    // foreach (array_chunk($cards, 3) as $row) {
+    //   $output[] = [
+    //     '#type' => 'container',
+    //     '#attributes' => [
+    //       'class' => ['row', 'mb-0'],
+    //     ],
+    //     'cards' => $row,
+    //   ];
+    // }
 
     return $output;
   }
