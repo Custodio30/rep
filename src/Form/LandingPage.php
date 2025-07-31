@@ -87,26 +87,26 @@ class LandingPage extends FormBase {
               ['instrument', 'Instrument(s)', null, 'instrument', 'image'],
               ['instrumentinstance', 'Instrument instance(s)', null, 'instrument_instance', 'image'],
               ['study', 'Study(ies)', null, 'fa-graduation-cap', 'icon'],
-              ['entity', 'Entity Type(s)', null, 'fa-cubes', 'icon'],
-              ['stream', 'Datafile Stream(s)', null, 'fa-file-contract', 'icon'],
+              ['entity', 'Entity Type(s)', null, 'fa-boxes-stacked', 'icon'],
+              ['stream', 'Datafile Stream(s)', null, 'datafile_stream', 'image'],
             ],
             // Row 2
             [
               ['organization', 'Organization(s)', null, 'fa-building', 'icon'],
               ['component', 'Component(s)', null, 'fa-puzzle-piece', 'icon'],
               ['componentinstance', 'Component Instance(s)', null, 'component_instance', 'image'],
-              ['objectcollection', 'Object Collection(s)', 'studyobjectcollection', 'fa-boxes-stacked', 'icon'],
-              ['variable', 'Variable(s)', null, 'fa-square-root-variable', 'icon'],
-              ['stream', 'Message Stream(s)', null, 'fa-envelope', 'icon'],
+              ['objectcollection', 'Object Collection(s)', 'studyobjectcollection', 'fa-cubes', 'icon'],
+              ['variable', 'Variable(s)', null, 'variable', 'image'],
+              ['stream', 'Message Stream(s)', null, 'message_stream', 'image'],
             ],
             // Row 3
             [
               ['person', 'Person(s)', null, 'fa-user', 'icon'],
               ['codebook', 'Codebook(s)', null, 'fa-book', 'icon'],
-              ['deployment', 'Deployment(s)', null, 'fa-rocket', 'icon'],
+              ['deployment', 'Deployment(s)', null, 'deployment', 'image'],
               ['object', 'Object(s)', 'studyobject', 'fa-cube', 'icon'],
-              ['semanticvariable', 'Semantic Variable(s)', null, 'fa-language', 'icon'],
-              ['value', 'Value(s)', null, 'fa-equals', 'icon'],
+              ['semanticvariable', 'Semantic Variable(s)', null, 'semanticvariable', 'image'],
+              ['value', 'Value(s)', null, 'value', 'image'],
             ],
           ];
 
